@@ -4,8 +4,8 @@ from scipy.spatial import distance
 import os
 from twilio.rest import Client
 
-account_sid = 'ACf16a1309baf37f4ad17564e2d32817e1'
-auth_token = '65203c4f18088b55558aa354900ca6cf'
+account_sid = '####' #Enter your Twilio account SID
+auth_token = '####' #Enter your Twilio account Authentication Token
 client = Client(account_sid, auth_token)
 a = []
 count = 0
@@ -21,7 +21,7 @@ def calculate_EAR(eye):
 
 
 cap = cv2.VideoCapture(0)
-address = "http://192.168.1.133:8080/video"
+address = "####" #Enter your own Webcam IP Address
 cap.open(address)
 hog_face_detector = dlib.get_frontal_face_detector()
 dlib_facelandmark = dlib.shape_predictor(
@@ -70,7 +70,7 @@ while True:
             count += 1
             if(count > 2):
                 call = client.calls.create(
-                    twiml='<Response><Say>Stay Alert</Say></Response>', to='+919619904035', from_='+13164459048')
+                    twiml='<Response><Say>Stay Alert</Say></Response>', to='####', from_='####') #Enter mobile number you want to call and your Twilio Account registered mobile number.
                 flag += 1
         else:
             count = 0
@@ -79,7 +79,7 @@ while True:
 
         if(flag == 1 or flag == 15):
             m = client.messages.create(
-                to='+919619904035', from_='+13164459048', body="Please check up on Aniket.")
+                to='####', from_='####', body="Enter message Body") #Enter cell phone number of emergency contact, Twilio account along with the message body.
         print(EAR)
 
         cv2.imshow("", frame)
